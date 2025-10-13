@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  
+  body {
+    @apply m-0 p-0 font-sans antialiased;
+    @apply bg-white text-gray-900;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  input, textarea {
+    @apply outline-none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-black text-white px-6 py-3 font-medium transition-all duration-300;
+    @apply hover:bg-gray-800 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-black border border-black px-6 py-3 font-medium transition-all duration-300;
+    @apply hover:bg-black hover:text-white active:scale-95;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 transition-colors duration-200;
+    @apply focus:border-black;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
