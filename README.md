@@ -34,6 +34,14 @@
 
 ## 快速开始
 
+### 环境配置
+
+如果需要使用 Context7 MCP 功能，请设置环境变量：
+
+```bash
+export CONTEXT7_API_KEY=your_api_key_here
+```
+
 ### 安装依赖
 
 ```bash
@@ -98,6 +106,39 @@ src/
 - 用户评价提交
 - 物流追踪
 - 客服系统
+
+## MCP 配置
+
+项目包含 `mcp.json` 配置文件，支持 Context7 MCP Server：
+
+### 功能
+- 代码库上下文查询
+- 项目搜索和信息获取
+- 智能代码理解
+
+### 使用方法
+
+1. 设置 API Key：
+```bash
+export CONTEXT7_API_KEY=your_api_key_here
+```
+
+2. MCP 配置已在 `mcp.json` 中完成，包含：
+   - Context7 MCP Server 配置
+   - 最大 token 限制：5000
+   - 默认输出格式：文本
+
+3. 使用 context7 命令：
+```bash
+# 搜索项目
+npx context7 search <搜索词>
+
+# 查询项目
+npx context7 <项目标识> [查询内容]
+
+# 查看项目信息
+npx context7 info <项目标识>
+```
 
 ## 许可证
 
