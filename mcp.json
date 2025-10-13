@@ -10,6 +10,13 @@
         "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
       },
       "description": "Context7 MCP Server - 提供代码库上下文查询功能"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ],
+      "description": "Chrome DevTools MCP Server - 浏览器调试和预览工具"
     }
   },
   "tools": {
@@ -18,6 +25,12 @@
       "config": {
         "maxTokens": 5000,
         "outputFormat": "txt"
+      }
+    },
+    "chrome-devtools": {
+      "enabled": true,
+      "config": {
+        "autoLaunch": true
       }
     }
   }

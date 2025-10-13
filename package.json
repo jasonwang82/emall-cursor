@@ -8,8 +8,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "preview:chrome": "bash scripts/launch-chrome-preview.sh",
     "check:components": "node scripts/check-component-standards.js",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directs --max-warnings 0"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
