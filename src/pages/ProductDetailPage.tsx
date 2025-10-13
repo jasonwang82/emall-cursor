@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Star, Heart, Minus, Plus, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useStore } from '../store/useStore'
 
@@ -59,7 +59,6 @@ const reviewsData = [
 ]
 
 export default function ProductDetailPage() {
-  const { id } = useParams()
   const navigate = useNavigate()
   const addToCart = useStore(state => state.addToCart)
   
