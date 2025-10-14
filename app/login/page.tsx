@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Mail, Lock, User as UserIcon } from 'lucide-react'
 
-export default function LoginPage() {
+function LoginForm() {
   const searchParams = useSearchParams()
   const isRegisterMode = searchParams.get('register') === 'true'
   
@@ -185,5 +185,17 @@ export default function LoginPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <div className="text-gray-500">加载中...</div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }
