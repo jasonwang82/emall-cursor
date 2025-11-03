@@ -17,11 +17,15 @@ E-Mall Cursor is a sophisticated e-commerce website designed specifically for wo
 
 ## Tech Stack
 
-- **Frontend Framework**: React / Next.js
+This project is designed to support the following technologies:
+
+- **Frontend Framework**: Next.js or React
 - **Styling**: Tailwind CSS
-- **State Management**: Zustand / Redux
+- **State Management**: Zustand or Redux
 - **UI Components**: shadcn/ui
-- **Routing**: React Router
+- **Routing**: React Router or Next.js App Router
+
+*Note: The specific technology choices will be determined based on the implementation requirements.*
 
 ## Getting Started
 
