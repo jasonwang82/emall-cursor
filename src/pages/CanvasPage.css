@@ -1,0 +1,146 @@
+.canvas-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.canvas-header {
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.canvas-header .header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.canvas-header .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #667eea;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.canvas-header .logo:hover {
+  color: #764ba2;
+}
+
+.canvas-header .header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.canvas-header .user-email {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.canvas-header .logout-btn {
+  padding: 0.5rem 1.2rem;
+  border: 2px solid #667eea;
+  background: transparent;
+  color: #667eea;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.canvas-header .logout-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+.canvas-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.canvas-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.coming-soon {
+  background: white;
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.coming-soon > p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0 0 2rem 0;
+}
+
+.prompt-display {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.prompt-display h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.prompt-display p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.back-btn {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+@media (max-width: 768px) {
+  .coming-soon {
+    padding: 2rem;
+  }
+  
+  .coming-soon h2 {
+    font-size: 2rem;
+  }
+}
