@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时尚女装电商网站 - 预览导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+        
+        .version {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .preview-links {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .preview-link {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .preview-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .preview-link .icon {
+            font-size: 32px;
+            margin-right: 15px;
+        }
+        
+        .preview-link .info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .preview-link .info p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .features {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .features h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+        
+        .features ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        
+        .features li {
+            padding: 10px 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .features li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .tech-stack {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 12px;
+        }
+        
+        .tech-stack h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .badge {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            color: #2e7d32;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .features ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>时尚女装电商网站 <span class="version">v2.0</span></h1>
+        <p class="subtitle">基于 shadcn/ui 的现代化电商平台</p>
+        
+        <div class="status">
+            <div class="status-dot"></div>
+            <span><strong>服务器状态:</strong> 运行中</span>
+        </div>
+        
+        <div class="preview-links">
+            <a href="http://localhost:4173" class="preview-link" target="_blank">
+                <div class="icon">🖥️</div>
+                <div class="info">
+                    <h3>本地预览</h3>
+                    <p>http://localhost:4173</p>
+                </div>
+            </a>
+            
+            <a href="http://172.30.0.2:4173" class="preview-link" target="_blank">
+                <div class="icon">🌐</div>
+                <div class="info">
+                    <h3>网络预览</h3>
+                    <p>http://172.30.0.2:4173</p>
+                </div>
+            </a>
+            
+            <a href="http://172.30.0.2:4173" class="preview-link" id="qr-link">
+                <div class="icon">📱</div>
+                <div class="info">
+                    <h3>手机扫码预览</h3>
+                    <p>使用手机浏览器扫描二维码访问</p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="features">
+            <h2>✨ 核心功能</h2>
+            <ul>
+                <li>首页轮播展示</li>
+                <li>新品推荐</li>
+                <li>用户注册登录</li>
+                <li>商品列表筛选</li>
+                <li>商品详情查看</li>
+                <li>购物车管理</li>
+                <li>在线结算</li>
+                <li>订单查询</li>
+                <li>个人中心</li>
+                <li>响应式设计</li>
+            </ul>
+        </div>
+        
+        <div class="tech-stack">
+            <h3>🔧 技术栈</h3>
+            <div class="tech-badges">
+                <span class="badge">React 18</span>
+                <span class="badge">TypeScript</span>
+                <span class="badge">Vite</span>
+                <span class="badge">shadcn/ui</span>
+                <span class="badge">Tailwind CSS</span>
+                <span class="badge">Radix UI</span>
+                <span class="badge">Zustand</span>
+                <span class="badge">React Router</span>
+                <span class="badge">Lucide Icons</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 检查服务器状态
+        async function checkServer() {
+            try {
+                const response = await fetch('http://localhost:4173');
+                if (response.ok) {
+                    document.querySelector('.status').style.background = '#e8f5e9';
+                    document.querySelector('.status').style.color = '#2e7d32';
+                    document.querySelector('.status span').innerHTML = '<strong>服务器状态:</strong> 运行中 ✓';
+                }
+            } catch (error) {
+                document.querySelector('.status').style.background = '#ffebee';
+                document.querySelector('.status').style.color = '#c62828';
+                document.querySelector('.status span').innerHTML = '<strong>服务器状态:</strong> 未运行 - 请先运行 npm run preview';
+                document.querySelector('.status-dot').style.background = '#f44336';
+            }
+        }
+        
+        checkServer();
+        setInterval(checkServer, 5000);
+    </script>
+</body>
+</html>
