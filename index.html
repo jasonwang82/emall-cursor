@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你好 - EMall Cursor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .greeting-container {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            animation: wave 1s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        
+        .description {
+            font-size: 1rem;
+            color: #777;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="greeting-container">
+        <h1>你好</h1>
+        <div class="subtitle">Hello</div>
+        <div class="description">
+            <p>欢迎来到 EMall Cursor！</p>
+            <p>Welcome to EMall Cursor!</p>
+        </div>
+        <div class="footer">
+            <p>EMall Cursor E-Commerce Platform</p>
+        </div>
+    </div>
+</body>
+</html>
