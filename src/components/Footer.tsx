@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin } from 'lucide-react'
 
-export default function Footer() {
+function Footer() {
   return (
     <footer className="bg-primary-50 border-t border-primary-200 mt-20">
       <div className="container-custom py-12 md:py-16">
@@ -84,3 +85,6 @@ export default function Footer() {
     </footer>
   )
 }
+
+// 使用 memo 优化 Footer 组件，避免不必要的重新渲染
+export default memo(Footer)

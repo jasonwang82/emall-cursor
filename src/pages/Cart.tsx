@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react'
 
@@ -42,12 +42,19 @@ export default function Cart() {
     setCartItems(cartItems.filter((item) => item.id !== id))
   }
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  )
-  const shipping = subtotal >= 99 ? 0 : 15
-  const total = subtotal + shipping
+  // 使用 useMemo 优化价格计算
+  const { subtotal, shipping, total } = useMemo(() => {
+    const sub = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    )
+    const ship = sub >= 99 ? 0 : 15
+    return {
+      subtotal: sub,
+      shipping: ship,
+      total: sub + ship
+    }
+  }, [cartItems])
 
   const handleCheckout = () => {
     if (cartItems.length === 0) {

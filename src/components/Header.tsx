@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X, ShoppingBag, User, Search } from 'lucide-react'
 
-export default function Header() {
+function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
@@ -101,3 +101,6 @@ export default function Header() {
     </header>
   )
 }
+
+// 使用 memo 优化 Header 组件，避免不必要的重新渲染
+export default memo(Header)

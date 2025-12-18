@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal } from 'lucide-react'
 
@@ -24,23 +24,26 @@ export default function Products() {
   const [sortBy, setSortBy] = useState('default')
   const [showFilters, setShowFilters] = useState(false)
 
-  // 筛选商品
-  let filteredProducts = allProducts
-  if (category) {
-    filteredProducts = allProducts.filter((p) => p.category === category)
-  }
-
-  // 排序
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price
-      case 'price-high':
-        return b.price - a.price
-      default:
-        return 0
+  // 筛选和排序商品 - 使用 useMemo 优化性能
+  const sortedProducts = useMemo(() => {
+    // 筛选商品
+    let filtered = allProducts
+    if (category) {
+      filtered = allProducts.filter((p) => p.category === category)
     }
-  })
+
+    // 排序
+    return [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'price-low':
+          return a.price - b.price
+        case 'price-high':
+          return b.price - a.price
+        default:
+          return 0
+      }
+    })
+  }, [category, sortBy])
 
   const getCategoryTitle = () => {
     if (category === 'new') return '新品上市'

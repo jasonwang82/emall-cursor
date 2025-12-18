@@ -1,6 +1,23 @@
-import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useState, memo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ShoppingCart, Heart, Star, Truck, RotateCcw, Shield } from 'lucide-react'
+
+// 优化的星级评分组件 - 使用 memo 避免不必要的重新渲染
+const StarRating = memo(({ rating }: { rating: number }) => {
+  return (
+    <div className="flex">
+      {[...Array(5)].map((_, i) => (
+        <Star
+          key={i}
+          size={16}
+          className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'text-primary-300'}
+        />
+      ))}
+    </div>
+  )
+})
+
+StarRating.displayName = 'StarRating'
 
 // 模拟商品详情数据
 const productData = {
@@ -54,7 +71,6 @@ const productData = {
 }
 
 export default function ProductDetail() {
-  const { id } = useParams()
   const navigate = useNavigate()
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState('')
@@ -277,15 +293,7 @@ export default function ProductDetail() {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
                     <span className="font-medium mr-4">{review.user}</span>
-                    <div className="flex">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={16}
-                          className={i < review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-primary-300'}
-                        />
-                      ))}
-                    </div>
+                    <StarRating rating={review.rating} />
                   </div>
                   <span className="text-sm text-primary-600">{review.date}</span>
                 </div>
