@@ -116,28 +116,21 @@ export default function Home() {
     <div>
       {/* 轮播图 */}
       <section className="relative h-[400px] md:h-[600px] overflow-hidden">
-        {banners.map((banner, index) => 
-          index === currentSlide && (
-            <div
-              key={banner.id}
-              className="absolute inset-0 animate-fadeIn"
-            >
-              <img
-                src={banner.image}
-                alt={banner.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <h2 className="text-4xl md:text-6xl font-light tracking-wider mb-4">
-                    {banner.title}
-                  </h2>
-                  <p className="text-lg md:text-xl tracking-wide">{banner.subtitle}</p>
-                </div>
-              </div>
+        <div className="absolute inset-0 animate-fadeIn">
+          <img
+            src={banners[currentSlide].image}
+            alt={banners[currentSlide].title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h2 className="text-4xl md:text-6xl font-light tracking-wider mb-4">
+                {banners[currentSlide].title}
+              </h2>
+              <p className="text-lg md:text-xl tracking-wide">{banners[currentSlide].subtitle}</p>
             </div>
-          )
-        )}
+          </div>
+        </div>
 
         {/* 轮播控制按钮 */}
         <button

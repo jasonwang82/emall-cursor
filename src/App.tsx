@@ -1,6 +1,18 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, memo } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+
+// 加载中组件 - 移到组件外避免重复创建
+const LoadingFallback = memo(() => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="text-center">
+      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-900"></div>
+      <p className="mt-4 text-primary-600">加载中...</p>
+    </div>
+  </div>
+))
+
+LoadingFallback.displayName = 'LoadingFallback'
 
 // 使用 lazy loading 优化初始加载性能
 const Home = lazy(() => import('./pages/Home'))
@@ -13,16 +25,6 @@ const Orders = lazy(() => import('./pages/Orders'))
 const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const Contact = lazy(() => import('./pages/Contact'))
-
-// 加载中组件
-const LoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-[60vh]">
-    <div className="text-center">
-      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-900"></div>
-      <p className="mt-4 text-primary-600">加载中...</p>
-    </div>
-  </div>
-)
 
 function App() {
   return (
