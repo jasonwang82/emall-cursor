@@ -184,8 +184,8 @@ codebuddy -p "Add unit tests"
 
 ## Next Steps
 
-- Explore the [Custom Agent Configuration](.github/agents/codebuddy.agent.md)
-- Read the [Main README](README.md)
+- Explore the [Custom Agent Configuration](./.github/agents/codebuddy.agent.md)
+- Read the [Main README](./README.md)
 - Experiment with different prompts
 - Customize the configuration for your workflow
 

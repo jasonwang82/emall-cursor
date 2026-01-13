@@ -239,4 +239,4 @@ For more examples and detailed documentation:
 codebuddy --help
 ```
 
-Or visit the [Quick Start Guide](CODEBUDDY_QUICKSTART.md).
+Or visit the [Quick Start Guide](../CODEBUDDY_QUICKSTART.md).

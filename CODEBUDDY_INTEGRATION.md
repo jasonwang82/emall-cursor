@@ -111,7 +111,7 @@ emall-cursor/
 
 2. **Clone the Repository**
    ```bash
-   git clone https://github.com/jasonwang82/emall-cursor.git
+   git clone <repository-url>
    cd emall-cursor
    ```
 
