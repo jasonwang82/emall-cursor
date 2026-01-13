@@ -1,0 +1,31 @@
+{
+  "name": "emall-cursor",
+  "description": "E-commerce mall project with AI assistant integration",
+  "version": "1.0.0",
+  "codebuddy": {
+    "enabled": true,
+    "autoCommit": false,
+    "features": {
+      "codeGeneration": true,
+      "refactoring": true,
+      "debugging": true,
+      "documentation": true,
+      "codeReview": true
+    },
+    "settings": {
+      "language": "auto-detect",
+      "framework": "auto-detect",
+      "testFramework": "auto-detect"
+    }
+  },
+  "prompts": {
+    "default": "Help with code development",
+    "examples": [
+      "Add authentication to the API",
+      "Refactor the checkout process",
+      "Generate unit tests for user module",
+      "Fix bugs in payment integration",
+      "Optimize database queries"
+    ]
+  }
+}
