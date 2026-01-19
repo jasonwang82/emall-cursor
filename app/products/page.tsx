@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import ProductCard from '@/components/ProductCard'
 import { SlidersHorizontal, ChevronDown } from 'lucide-react'
 
@@ -23,6 +23,62 @@ const products = [
 export default function ProductsPage() {
   const [filterOpen, setFilterOpen] = useState(false)
   const [sortBy, setSortBy] = useState('default')
+  const [filters, setFilters] = useState({
+    categories: [] as string[],
+    sizes: [] as string[],
+    colors: [] as string[],
+    priceRanges: [] as string[]
+  })
+
+  // Memoize filtered and sorted products
+  const displayedProducts = useMemo(() => {
+    let filtered = [...products]
+
+    // Apply filters (if any are selected)
+    if (filters.categories.length > 0 || filters.sizes.length > 0 || 
+        filters.colors.length > 0 || filters.priceRanges.length > 0) {
+      // Note: Since our mock data doesn't have category/size/color info,
+      // this is a placeholder for when real data is available
+      // In a real app, you'd filter based on product properties
+    }
+
+    // Apply sorting
+    switch (sortBy) {
+      case 'price-asc':
+        filtered.sort((a, b) => a.price - b.price)
+        break
+      case 'price-desc':
+        filtered.sort((a, b) => b.price - a.price)
+        break
+      case 'newest':
+        // For mock data, items with isNew property come first
+        filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0))
+        break
+      default:
+        // Keep default order
+        break
+    }
+
+    return filtered
+  }, [sortBy, filters])
+
+  const toggleFilter = (category: keyof typeof filters, value: string) => {
+    setFilters(prev => ({
+      ...prev,
+      [category]: prev[category].includes(value)
+        ? prev[category].filter(v => v !== value)
+        : [...prev[category], value]
+    }))
+  }
+
+  const clearFilters = () => {
+    setFilters({
+      categories: [],
+      sizes: [],
+      colors: [],
+      priceRanges: []
+    })
+  }
 
   return (
     <div className="container-custom py-8 md:py-12">
@@ -32,7 +88,7 @@ export default function ProductsPage() {
           全部商品
         </h1>
         <p className="text-gray-600">
-          共 {products.length} 件商品
+          共 {displayedProducts.length} 件商品
         </p>
       </div>
 
@@ -151,10 +207,16 @@ export default function ProductsPage() {
           </div>
 
           <div className="flex justify-end space-x-4 mt-6">
-            <button className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+            <button 
+              onClick={clearFilters}
+              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+            >
               清除筛选
             </button>
-            <button className="btn-primary text-sm px-8 py-2">
+            <button 
+              onClick={() => setFilterOpen(false)}
+              className="btn-primary text-sm px-8 py-2"
+            >
               应用筛选
             </button>
           </div>
@@ -163,7 +225,7 @@ export default function ProductsPage() {
 
       {/* Products Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {products.map((product) => (
+        {displayedProducts.map((product) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </div>

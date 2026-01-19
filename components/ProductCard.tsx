@@ -20,6 +20,7 @@ export default function ProductCard({ id, name, price, originalPrice, image, isN
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          loading="lazy"
         />
         {isNew && (
           <span className="absolute top-4 left-4 bg-black text-white text-xs px-3 py-1 tracking-wide">

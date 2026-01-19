@@ -45,7 +45,7 @@ export default function Carousel() {
       setCurrent((prev) => (prev + 1) % slides.length)
     }, 5000)
     return () => clearInterval(timer)
-  }, [])
+  }, []) // This is correct - we want the interval to run once
 
   const prev = () => {
     setCurrent((current - 1 + slides.length) % slides.length)
@@ -57,42 +57,53 @@ export default function Carousel() {
 
   return (
     <div className="relative w-full h-[60vh] md:h-[80vh] overflow-hidden bg-gray-100">
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === current ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <Image
-            src={slide.image}
-            alt={slide.title}
-            fill
-            className="object-cover"
-            priority={index === 0}
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-20" />
-          
-          {/* Content */}
-          <div className="absolute inset-0 flex items-center justify-center text-center">
-            <div className="text-white px-4">
-              <h2 className="text-4xl md:text-6xl font-light tracking-wider mb-4 animate-[fadeInUp_0.8s_ease-out]">
-                {slide.title}
-              </h2>
-              <p className="text-lg md:text-xl mb-8 animate-[fadeInUp_0.8s_ease-out_0.2s_both]">
-                {slide.subtitle}
-              </p>
-              <Link
-                href={slide.link}
-                className="inline-block bg-white text-black px-8 py-3 hover:bg-gray-100 transition-colors animate-[fadeInUp_0.8s_ease-out_0.4s_both]"
-              >
-                立即选购
-              </Link>
+      {slides.map((slide, index) => {
+        // Only render current slide and adjacent slides for smoother transitions
+        const isVisible = index === current
+        const isAdjacent = index === (current - 1 + slides.length) % slides.length || 
+                          index === (current + 1) % slides.length
+        
+        if (!isVisible && !isAdjacent) {
+          return null
+        }
+
+        return (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === current ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+              priority={index === 0}
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-20" />
+            
+            {/* Content */}
+            <div className="absolute inset-0 flex items-center justify-center text-center">
+              <div className="text-white px-4">
+                <h2 className="text-4xl md:text-6xl font-light tracking-wider mb-4 animate-[fadeInUp_0.8s_ease-out]">
+                  {slide.title}
+                </h2>
+                <p className="text-lg md:text-xl mb-8 animate-[fadeInUp_0.8s_ease-out_0.2s_both]">
+                  {slide.subtitle}
+                </p>
+                <Link
+                  href={slide.link}
+                  className="inline-block bg-white text-black px-8 py-3 hover:bg-gray-100 transition-colors animate-[fadeInUp_0.8s_ease-out_0.4s_both]"
+                >
+                  立即选购
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
 
       {/* Navigation Buttons */}
       <button

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Trash2, ShoppingBag } from 'lucide-react'
@@ -43,9 +43,21 @@ export default function CartPage() {
     setCartItems(items => items.filter(item => item.id !== id))
   }
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = subtotal >= 299 ? 0 : 20
-  const total = subtotal + shipping
+  // Memoize expensive calculations to avoid recalculating on every render
+  const subtotal = useMemo(() => 
+    cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [cartItems]
+  )
+  
+  const shipping = useMemo(() => 
+    subtotal >= 299 ? 0 : 20,
+    [subtotal]
+  )
+  
+  const total = useMemo(() => 
+    subtotal + shipping,
+    [subtotal, shipping]
+  )
 
   if (cartItems.length === 0) {
     return (

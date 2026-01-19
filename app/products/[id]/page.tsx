@@ -55,6 +55,9 @@ const reviews = [
   }
 ]
 
+// Pre-create rating arrays to avoid recreating on each render
+const FIVE_STARS_ARRAY = Array.from({ length: 5 }, (_, i) => i)
+
 export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState('')
@@ -129,7 +132,7 @@ export default function ProductDetailPage() {
 
           <div className="flex items-center space-x-4 mb-6">
             <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
+              {FIVE_STARS_ARRAY.map((i) => (
                 <Star key={i} className="w-4 h-4 fill-black" />
               ))}
             </div>
@@ -310,7 +313,7 @@ export default function ProductDetailPage() {
                     <div className="flex items-center space-x-3">
                       <span className="font-medium">{review.user}</span>
                       <div className="flex">
-                        {[...Array(5)].map((_, i) => (
+                        {FIVE_STARS_ARRAY.map((i) => (
                           <Star
                             key={i}
                             className={`w-4 h-4 ${
