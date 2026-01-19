@@ -41,11 +41,13 @@ export default function Carousel() {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
+    // Set up auto-rotation timer. Empty dependency array ensures the timer is set up once
+    // and doesn't restart when 'current' changes, preventing timer accumulation
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length)
     }, 5000)
     return () => clearInterval(timer)
-  }, []) // This is correct - we want the interval to run once
+  }, [])
 
   const prev = () => {
     setCurrent((current - 1 + slides.length) % slides.length)

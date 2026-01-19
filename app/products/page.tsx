@@ -34,14 +34,6 @@ export default function ProductsPage() {
   const displayedProducts = useMemo(() => {
     let filtered = [...products]
 
-    // Apply filters (if any are selected)
-    if (filters.categories.length > 0 || filters.sizes.length > 0 || 
-        filters.colors.length > 0 || filters.priceRanges.length > 0) {
-      // Note: Since our mock data doesn't have category/size/color info,
-      // this is a placeholder for when real data is available
-      // In a real app, you'd filter based on product properties
-    }
-
     // Apply sorting
     switch (sortBy) {
       case 'price-asc':
@@ -60,7 +52,7 @@ export default function ProductsPage() {
     }
 
     return filtered
-  }, [sortBy, filters])
+  }, [sortBy]) // filters removed as it's not currently used in the logic
 
   const toggleFilter = (category: keyof typeof filters, value: string) => {
     setFilters(prev => ({

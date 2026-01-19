@@ -58,18 +58,19 @@ const reviews = [
 // Pre-create rating arrays to avoid recreating on each render
 const FIVE_STARS_ARRAY = Array.from({ length: 5 }, (_, i) => i)
 
+// Color name mapping
+const COLOR_NAMES: Record<string, string> = {
+  black: '黑色',
+  white: '白色',
+  gray: '灰色'
+}
+
 export default function ProductDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState<'details' | 'reviews'>('details')
-
-  const colorNames: Record<string, string> = {
-    black: '黑色',
-    white: '白色',
-    gray: '灰色'
-  }
 
   return (
     <div className="container-custom py-8 md:py-12">
@@ -151,7 +152,7 @@ export default function ProductDetailPage() {
               <span className="text-sm font-medium">颜色</span>
               {selectedColor && (
                 <span className="text-sm text-gray-600">
-                  已选：{colorNames[selectedColor]}
+                  已选：{COLOR_NAMES[selectedColor]}
                 </span>
               )}
             </div>
@@ -164,7 +165,7 @@ export default function ProductDetailPage() {
                     selectedColor === color ? 'border-black' : 'border-gray-300'
                   }`}
                   style={{ backgroundColor: color }}
-                  title={colorNames[color]}
+                  title={COLOR_NAMES[color]}
                 />
               ))}
             </div>
