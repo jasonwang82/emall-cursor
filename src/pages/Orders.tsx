@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Package, Truck, CheckCircle, X } from 'lucide-react'
 
@@ -69,27 +69,35 @@ const ordersList = [
   },
 ]
 
+// Memoize the status icon function outside component to avoid recreation
+const getStatusIcon = (status: string) => {
+  switch (status) {
+    case 'delivered':
+      return <CheckCircle size={20} className="text-green-500" />
+    case 'shipping':
+      return <Truck size={20} className="text-blue-500" />
+    case 'processing':
+      return <Package size={20} className="text-yellow-500" />
+    case 'cancelled':
+      return <X size={20} className="text-red-500" />
+    default:
+      return <Package size={20} className="text-primary-400" />
+  }
+}
+
 export default function Orders() {
   const [activeTab, setActiveTab] = useState('all')
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'delivered':
-        return <CheckCircle size={20} className="text-green-500" />
-      case 'shipping':
-        return <Truck size={20} className="text-blue-500" />
-      case 'processing':
-        return <Package size={20} className="text-yellow-500" />
-      case 'cancelled':
-        return <X size={20} className="text-red-500" />
-      default:
-        return <Package size={20} className="text-primary-400" />
-    }
-  }
+  // Memoize filtered orders to avoid recalculation on every render
+  const filteredOrders = useMemo(() => {
+    return activeTab === 'all' 
+      ? ordersList 
+      : ordersList.filter(order => order.status === activeTab)
+  }, [activeTab])
 
-  const filteredOrders = activeTab === 'all' 
-    ? ordersList 
-    : ordersList.filter(order => order.status === activeTab)
+  const handleTabChange = useCallback((tab: string) => {
+    setActiveTab(tab)
+  }, [])
 
   return (
     <div className="container-custom py-8 md:py-12">
@@ -100,7 +108,7 @@ export default function Orders() {
       {/* 订单状态标签 */}
       <div className="flex overflow-x-auto mb-8 border-b border-primary-200">
         <button
-          onClick={() => setActiveTab('all')}
+          onClick={() => handleTabChange('all')}
           className={`px-6 py-3 text-sm tracking-wide whitespace-nowrap border-b-2 transition-colors ${
             activeTab === 'all'
               ? 'border-primary-900 text-primary-900 font-medium'
@@ -110,7 +118,7 @@ export default function Orders() {
           全部订单
         </button>
         <button
-          onClick={() => setActiveTab('processing')}
+          onClick={() => handleTabChange('processing')}
           className={`px-6 py-3 text-sm tracking-wide whitespace-nowrap border-b-2 transition-colors ${
             activeTab === 'processing'
               ? 'border-primary-900 text-primary-900 font-medium'
@@ -120,7 +128,7 @@ export default function Orders() {
           处理中
         </button>
         <button
-          onClick={() => setActiveTab('shipping')}
+          onClick={() => handleTabChange('shipping')}
           className={`px-6 py-3 text-sm tracking-wide whitespace-nowrap border-b-2 transition-colors ${
             activeTab === 'shipping'
               ? 'border-primary-900 text-primary-900 font-medium'
@@ -130,7 +138,7 @@ export default function Orders() {
           配送中
         </button>
         <button
-          onClick={() => setActiveTab('delivered')}
+          onClick={() => handleTabChange('delivered')}
           className={`px-6 py-3 text-sm tracking-wide whitespace-nowrap border-b-2 transition-colors ${
             activeTab === 'delivered'
               ? 'border-primary-900 text-primary-900 font-medium'

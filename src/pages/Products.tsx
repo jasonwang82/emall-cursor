@@ -159,6 +159,7 @@ export default function Products() {
                     <img
                       src={product.image}
                       alt={product.name}
+                      loading="lazy"
                       className="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     {product.category === 'new' && (

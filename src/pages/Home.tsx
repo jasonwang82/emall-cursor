@@ -182,6 +182,7 @@ export default function Home() {
                 <img
                   src={product.image}
                   alt={product.name}
+                  loading="lazy"
                   className="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-2 right-2 bg-primary-900 text-white text-xs px-2 py-1 tracking-wide">
@@ -217,6 +218,7 @@ export default function Home() {
                   <img
                     src={product.image}
                     alt={product.name}
+                    loading="lazy"
                     className="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
