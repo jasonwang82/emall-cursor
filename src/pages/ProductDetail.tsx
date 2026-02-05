@@ -54,7 +54,7 @@ const productData = {
 }
 
 export default function ProductDetail() {
-  const { id } = useParams()
+  const { id: _productId } = useParams() // Product ID from URL (currently using mock data)
   const navigate = useNavigate()
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedSize, setSelectedSize] = useState('')

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react'
 
@@ -28,34 +28,43 @@ export default function Cart() {
   const navigate = useNavigate()
   const [cartItems, setCartItems] = useState(initialCartItems)
 
-  const updateQuantity = (id: number, delta: number) => {
-    setCartItems(
-      cartItems.map((item) =>
+  const updateQuantity = useCallback((id: number, delta: number) => {
+    setCartItems(prevItems =>
+      prevItems.map((item) =>
         item.id === id
           ? { ...item, quantity: Math.max(1, item.quantity + delta) }
           : item
       )
     )
-  }
+  }, [])
 
-  const removeItem = (id: number) => {
-    setCartItems(cartItems.filter((item) => item.id !== id))
-  }
+  const removeItem = useCallback((id: number) => {
+    setCartItems(prevItems => prevItems.filter((item) => item.id !== id))
+  }, [])
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  )
-  const shipping = subtotal >= 99 ? 0 : 15
-  const total = subtotal + shipping
+  // Memoize calculations to avoid recalculation on every render
+  const { subtotal, shipping, total } = useMemo(() => {
+    const calculatedSubtotal = cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    )
+    const calculatedShipping = calculatedSubtotal >= 99 ? 0 : 15
+    const calculatedTotal = calculatedSubtotal + calculatedShipping
+    
+    return {
+      subtotal: calculatedSubtotal,
+      shipping: calculatedShipping,
+      total: calculatedTotal,
+    }
+  }, [cartItems])
 
-  const handleCheckout = () => {
+  const handleCheckout = useCallback(() => {
     if (cartItems.length === 0) {
       alert('购物车为空')
       return
     }
     navigate('/checkout')
-  }
+  }, [cartItems.length, navigate])
 
   if (cartItems.length === 0) {
     return (

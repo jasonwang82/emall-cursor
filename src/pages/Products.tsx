@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal } from 'lucide-react'
 
@@ -24,29 +24,38 @@ export default function Products() {
   const [sortBy, setSortBy] = useState('default')
   const [showFilters, setShowFilters] = useState(false)
 
-  // 筛选商品
-  let filteredProducts = allProducts
-  if (category) {
-    filteredProducts = allProducts.filter((p) => p.category === category)
-  }
-
-  // 排序
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price
-      case 'price-high':
-        return b.price - a.price
-      default:
-        return 0
+  // Memoize filtered and sorted products to avoid recalculation on every render
+  const sortedProducts = useMemo(() => {
+    // 筛选商品
+    let filteredProducts = allProducts
+    if (category) {
+      filteredProducts = allProducts.filter((p) => p.category === category)
     }
-  })
 
-  const getCategoryTitle = () => {
+    // 排序
+    const sorted = [...filteredProducts].sort((a, b) => {
+      switch (sortBy) {
+        case 'price-low':
+          return a.price - b.price
+        case 'price-high':
+          return b.price - a.price
+        default:
+          return 0
+      }
+    })
+    
+    return sorted
+  }, [category, sortBy])
+
+  const getCategoryTitle = useCallback(() => {
     if (category === 'new') return '新品上市'
     if (category === 'sale') return '热销推荐'
     return '全部商品'
-  }
+  }, [category])
+
+  const toggleFilters = useCallback(() => {
+    setShowFilters(prev => !prev)
+  }, [])
 
   return (
     <div className="container-custom py-8 md:py-12">
@@ -69,7 +78,7 @@ export default function Products() {
 
           {/* 筛选按钮（移动端） */}
           <button
-            onClick={() => setShowFilters(!showFilters)}
+            onClick={toggleFilters}
             className="md:hidden p-2 border border-primary-300 hover:bg-primary-50 transition-colors"
             aria-label="筛选"
           >

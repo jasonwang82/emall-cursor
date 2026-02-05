@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react'
 
 export default function Contact() {
@@ -9,15 +9,28 @@ export default function Contact() {
     message: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Cleanup timeout on unmount to prevent memory leak
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // 这里添加发送邮件逻辑
     console.log('Contact form:', formData)
     setSubmitted(true)
-    setTimeout(() => {
+    
+    // Store timeout reference for cleanup
+    timeoutRef.current = setTimeout(() => {
       setSubmitted(false)
       setFormData({ name: '', email: '', subject: '', message: '' })
+      timeoutRef.current = null
     }, 3000)
   }
 
