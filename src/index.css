@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-primary-black antialiased;
+  }
+  
+  * {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-black text-white px-8 py-3 text-sm font-medium tracking-wide uppercase transition-all duration-300 hover:bg-primary-gray;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-primary-black border border-primary-black px-8 py-3 text-sm font-medium tracking-wide uppercase transition-all duration-300 hover:bg-primary-black hover:text-white;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-primary-lightgray focus:border-primary-black focus:outline-none text-sm transition-colors;
+  }
+  
+  .section-title {
+    @apply text-2xl md:text-3xl font-light tracking-wide text-center mb-8 md:mb-12 uppercase;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Image loading animation */
+img {
+  @apply transition-opacity duration-300;
+}
+
+img[loading] {
+  @apply opacity-0;
+}
+
+img[loading="lazy"] {
+  @apply opacity-100;
+}
